@@ -1,0 +1,37 @@
+name: Deploy an Elixir Phoenix application
+type: update
+description: Deploy an Elixir Phoenix application using JPS
+homepage: https://github.com/alma3lol/elixir-phoenix-docker-build
+
+targetNodes:
+  nodeType:
+    - docker
+
+settings:
+  fields:
+    - name: github_repo
+      caption: Github Repo Url
+      type: string
+      default: ""
+      required: "true"
+    - name: github_branch
+      caption: Branch
+      type: string
+      default: main
+      required: "true"
+    - caption: Github username
+      type: string
+      name: github_user
+      default: ""
+      required: "true"
+    - caption: Github token
+      type: string
+      name: github_token
+      default: ""
+      required: "true"
+
+onInstall:
+  script: /scripts/check-deployment-type.ts?_r=${fn.random}
+  next: setup
+
+success: Your application has been successfuly updated.
